@@ -1,0 +1,19 @@
+version: '3'
+
+volumes:
+  pg_data_local:
+    driver: local
+
+services:
+  restore:
+    image: postgres:15-alpine
+    volumes:
+      - pg_data_local:/var/lib/postgresql/data
+      - ./:/opt/data/
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      PGPASSWORD: password
+    ports:
+    - 5433:5432
